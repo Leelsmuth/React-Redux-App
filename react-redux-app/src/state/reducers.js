@@ -1,15 +1,26 @@
 import * as types from "./actionTypes";
 
-const initialValueCount = 0;
-export function countReducer(count = initialValueCount, action) {
+const initialState = {
+  quote: null,
+  isFetching: false,
+  error: ""
+};
+
+export const storeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.INCREMENT:
-      return count + 1;
-    case types.DECREMENT:
-      return count - 1;
-    case types.RESET:
-      return 0;
+    case types.FETCHING_QUOTE_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ""
+      };
+    case types.FETCHING_QUOTE_SUCCESS:
+      return {
+        ...state,
+        quote: action.payload,
+        isFetching: false
+      };
     default:
-      return count;
+      return state;
   }
-}
+};
