@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect } from "react-redux";
+import * as actionCreators from "./state/actioneCreators";
 
-function App() {
+export function App(props) {
+  // `count` comes from the state of the app
+  // `increment` is an action creator
+  // THE GOODIES COME FROM PROPS!!!!! YOU WILL FORGET THIS
+  const { count, increment, decrement } = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="component">
+      The count is {count}
+      <button onClick={increment}>increment</button>
+      <button onClick={decrement}>decrement</button>
     </div>
   );
 }
 
-export default App;
+// `connect` PLUGS THE APP STATE AND THE ACTION CREATORS
+// INTO THE COMPONENT!!! (through its props)
+export default connect(
+  // callback that takes state and returns it (mapStateToProps)
+  state => state, // we get all slices of state through props (8)
+  actionCreators // we get all action creators through props (9)
+)(App);
+
+// NOTE: we could inject this instead of the 'state => state' callback
+// function mapStateToProps(state) {
+//   return {
+//     count: state.count,
+//   };
+// }
