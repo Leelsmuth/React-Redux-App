@@ -4,13 +4,8 @@ import * as actionCreators from "../state/actionCreators";
 
 const Quotes = ({ getQuote, quote, isFetching }) => {
   useEffect(() => {
-    // run action creator when the component mounts
     getQuote();
-  }, [getQuote]);
-
-  if (isFetching) {
-    return <h2>Fetching quote for ya!</h2>;
-  }
+  }, []);
 
   return (
     <>

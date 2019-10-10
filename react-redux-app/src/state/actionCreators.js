@@ -6,12 +6,15 @@ export const getQuote = () => dispatch => {
   axios
     .get("https://api.kanye.rest")
     .then(res => {
-      dispatch({ type: types.FETCHING_QUOTE_SUCCESS, payload: res.data.quote });
+      dispatch({
+        type: types.FETCHING_QUOTE_SUCCESS,
+        payload: res.data.quote
+      });
     })
     .catch(err => {
       dispatch({
         type: types.FETCHING_QUOTE_FAILURE,
-        payload: `${err.response.message} code: ${err.response.code}`
+        payload: err.response.message
       });
     });
 };
