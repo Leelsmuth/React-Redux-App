@@ -7,6 +7,10 @@ const Quotes = ({ getQuote, quote, isFetching }) => {
     getQuote();
   }, []);
 
+  if (isFetching) {
+    return <h2>Fetching quote for ya!</h2>;
+  }
+
   return (
     <>
       <h2>Kanye says: {quote}</h2>
